@@ -50,9 +50,11 @@ public class BoardController {
 
     // 게시글 상세
     @GetMapping("/{id}")
-    public String getOne(@PathVariable Long id, Model model) {
+    public String getOne(@PathVariable Long id, HttpSession session, Model model) {
         BoardDTO board = boardService.getOne(id);
         model.addAttribute("board", board);
+        Object loginUser = session.getAttribute("loginUser");
+        model.addAttribute("loginUser", loginUser);
         return "boardDetail";
     }
 
