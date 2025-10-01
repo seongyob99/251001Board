@@ -24,10 +24,10 @@ public class MemberController {
 
     // Signup 처리
     @PostMapping("/signup")
-    public String signup(MemberDTO memberDTO, Model model) {
+    public String signup(MemberDTO memberDTO, RedirectAttributes redirectAttributes) {
         String msg = memberService.signup(memberDTO);
-        model.addAttribute("message", msg);
-        return "signupResult";
+        redirectAttributes.addFlashAttribute("message", msg);
+        return "redirect:/members/login";
     }
 
     // 로그인 폼

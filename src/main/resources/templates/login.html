@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>로그인</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+<div th:if="${message}">
+    <script th:inline="javascript">
+        alert([[${message}]]);
+    </script>
+</div>
 <div class="card">
     <h2>로그인</h2>
     <form action="/members/login" method="post">
