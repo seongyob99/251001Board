@@ -1,51 +1,69 @@
 package com.example.Board.controller;
 
-import com.example.Board.domain.Board;
-import com.example.Board.repository.BoardRepository;
+import com.example.Board.dto.BoardDTO;
+import com.example.Board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/boards")
 public class BoardController {
+
     @Autowired
-    private BoardRepository boardRepository;
+    private BoardService boardService;
 
-    // Create
-    @PostMapping
-    public Board create(@RequestBody Board board) {
-        return boardRepository.save(board);
-    }
-
-    // Read All
+    // 게시글 리스트
     @GetMapping
-    public List<Board> getAll() {
-        return boardRepository.findAll();
+    public String getAll(Model model) {
+        List<BoardDTO> list = boardService.getAll();
+        model.addAttribute("boards", list);
+        return "boardList";
     }
 
-    // Read One
+    // 게시글 작성 폼
+    @GetMapping("/create")
+    public String createForm() {
+        return "boardCreate";
+    }
+
+    // 게시글 작성 처리
+    @PostMapping("/create")
+    public String create(BoardDTO boardDTO, Model model) {
+        boardService.create(boardDTO);
+        return "redirect:/boards";
+    }
+
+    // 게시글 상세
     @GetMapping("/{id}")
-    public Board getOne(@PathVariable Long id) {
-        return boardRepository.findById(id).orElse(null);
+    public String getOne(@PathVariable Long id, Model model) {
+        BoardDTO board = boardService.getOne(id);
+        model.addAttribute("board", board);
+        return "boardDetail";
     }
 
-    // Update
-    @PutMapping("/{id}")
-    public Board update(@PathVariable Long id, @RequestBody Board newBoard) {
-       Board board = boardRepository.findById(id).orElse(null);
-        if (board != null) {
-            board.setTitle(newBoard.getTitle());
-            board.setContent(newBoard.getContent());
-            return boardRepository.save(board);
-        }
-        return null;
+    // 게시글 수정 폼
+    @GetMapping("/{id}/edit")
+    public String editForm(@PathVariable Long id, Model model) {
+        BoardDTO board = boardService.getOne(id);
+        model.addAttribute("board", board);
+        return "boardEdit";
     }
 
-    // Delete
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        boardRepository.deleteById(id);
+    // 게시글 수정 처리
+    @PostMapping("/{id}/edit")
+    public String update(@PathVariable Long id, BoardDTO boardDTO) {
+        boardService.update(id, boardDTO);
+        return "redirect:/boards/" + id;
+    }
+
+    // 게시글 삭제
+    @PostMapping("/{id}/delete")
+    public String delete(@PathVariable Long id) {
+        boardService.delete(id);
+        return "redirect:/boards";
     }
 }
