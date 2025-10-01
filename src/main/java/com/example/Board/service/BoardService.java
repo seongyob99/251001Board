@@ -82,7 +82,7 @@ public class BoardService {
     // 커서기반 페이징
     public List<BoardDTO> getBoards(Long lastId, int size) {
         List<Board> boards;
-        Pageable pageable = PageRequest.of(0, size); // 0페이지, size만큼
+        Pageable pageable = PageRequest.of(0, size);
 
         if (lastId == null) {
             boards = boardRepository.findAllByOrderByIdDesc(pageable);
