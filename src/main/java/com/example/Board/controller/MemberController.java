@@ -38,14 +38,14 @@ public class MemberController {
 
     // Login 처리
     @PostMapping("/login")
-    public String login(MemberDTO memberDTO, RedirectAttributes redirectAttrs) {
-        boolean success = memberService.login(memberDTO).equals("로그인 성공");
-        if (success) {
-            // 로그인 성공 시 redirect + flash attribute
-            redirectAttrs.addFlashAttribute("message", "로그인 성공");
-            return "redirect:/boards";
+    public String login(MemberDTO memberDTO, HttpSession session, RedirectAttributes redirectAttributes) {
+        String msg = memberService.login(memberDTO);
+        if(msg.equals("로그인 성공")) {
+            session.setAttribute("loginUser", memberDTO); // 로그인 성공 시 세션에 저장
+            redirectAttributes.addFlashAttribute("message", "로그인 성공!");
+            return "redirect:/boards"; // 로그인 후 게시판으로 이동
         } else {
-            redirectAttrs.addFlashAttribute("message", "로그인 실패");
+            redirectAttributes.addFlashAttribute("message", msg);
             return "redirect:/members/login";
         }
     }
