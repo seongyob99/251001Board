@@ -6,16 +6,20 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<div class="card" style="max-width: 600px; margin: 50px auto; padding: 20px; box-shadow: 0 0 10px #ccc;">
-    <h2 th:text="${board.title}" style="text-align: center;">제목</h2>
-    <p><strong>작성자:</strong> <span th:text="${board.writer}">작성자</span></p>
-    <p th:text="${board.content}">내용</p>
+<div class="card detail-card">
+    <h2 th:text="${board.title}">제목</h2>
+    <div class="info-section">
+        <p><strong>작성자:</strong> <span th:text="${board.writer}">작성자</span></p>
+    </div>
+    <div class="content-section">
+        <p th:text="${board.content}">내용</p>
+    </div>
 
-    <div style="text-align: center; margin-top: 10px;">
-        <a th:href="@{/boards}">목록</a>
-        <a th:href="@{/boards/{id}/edit(id=${board.id})}">수정</a>
-        <form th:action="@{/boards/{id}/delete(id=${board.id})}" method="post" style="display:inline;">
-            <button type="submit">삭제</button>
+    <div class="button-group">
+        <a th:href="@{/boards}" class="button button-list">목록</a>
+        <a th:href="@{/boards/{id}/edit(id=${board.id})}" class="button button-edit">수정</a>
+        <form th:action="@{/boards/{id}/delete(id=${board.id})}" method="post" class="inline-form">
+            <button type="submit" class="button button-delete" style="width: 140px;">삭제</button>
         </form>
     </div>
 </div>

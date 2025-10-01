@@ -19,15 +19,46 @@ body, html {
     text-align: center;
 }
 
+/* 상세 페이지용 카드 */
+.detail-card {
+    width: 600px;
+    max-width: 90%;
+}
+
 /* 제목 */
 .card h2 {
     margin-bottom: 30px;
+    color: #333;
+    text-align: center;
+}
+
+/* 정보 섹션 */
+.info-section {
+    text-align: left;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.info-section p {
+    margin: 5px 0;
+    color: #666;
+}
+
+/* 내용 섹션 */
+.content-section {
+    text-align: left;
+    margin-bottom: 30px;
+    padding: 20px 0;
+    min-height: 100px;
+    line-height: 1.6;
     color: #333;
 }
 
 /* 입력 필드 */
 .card input[type="text"],
-.card input[type="password"] {
+.card input[type="password"],
+.card textarea {
     width: 100%;
     padding: 12px;
     margin: 10px 0;
@@ -36,8 +67,87 @@ body, html {
     box-sizing: border-box;
 }
 
-/* 버튼 */
-.card button {
+.card textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+/* 폼 그룹 */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: bold;
+}
+
+/* 버튼 그룹 */
+.button-group {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* 인라인 폼 */
+.inline-form {
+    display: inline-block;
+    margin: 0;
+}
+
+/* 버튼 기본 스타일 */
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100px;
+    text-align: center;
+    border: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* 버튼별 색상 */
+.button-list {
+    background-color: #007BFF;
+}
+
+.button-list:hover {
+    background-color: #0056b3;
+}
+
+.button-edit {
+    background-color: #28A745;
+}
+
+.button-edit:hover {
+    background-color: #218838;
+}
+
+.button-delete {
+    background-color: #DC3545;
+}
+
+.button-delete:hover {
+    background-color: #c82333;
+}
+
+/* 폼 버튼 스타일 통일 (button-group 안의 버튼은 제외) */
+.card button:not(.button):not(.button-delete) {
     width: 100%;
     padding: 12px;
     background-color: #4CAF50;
@@ -49,18 +159,24 @@ body, html {
     margin-top: 15px;
 }
 
-.card button:hover {
+.card button:not(.button):not(.button-delete):hover {
     background-color: #45a049;
 }
 
+/* button-group 내부 버튼 스타일 재정의 */
+.button-group .button {
+    width: 100px !important;
+    padding: 10px 20px !important;
+}
+
 /* 링크 */
-.card a {
+.card a:not(.button) {
     display: block;
     margin-top: 15px;
     color: #555;
     text-decoration: none;
 }
 
-.card a:hover {
+.card a:not(.button):hover {
     text-decoration: underline;
 }
