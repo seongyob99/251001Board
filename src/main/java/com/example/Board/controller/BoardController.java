@@ -26,13 +26,13 @@ public class BoardController {
     }
 
     // Read One
-    @GetMapping("{/id}")
+    @GetMapping("/{id}")
     public Board getOne(@PathVariable Long id) {
         return boardRepository.findById(id).orElse(null);
     }
 
     // Update
-    @PutMapping
+    @PutMapping("/{id}")
     public Board update(@PathVariable Long id, @RequestBody Board newBoard) {
        Board board = boardRepository.findById(id).orElse(null);
         if (board != null) {
@@ -44,7 +44,7 @@ public class BoardController {
     }
 
     // Delete
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         boardRepository.deleteById(id);
     }
