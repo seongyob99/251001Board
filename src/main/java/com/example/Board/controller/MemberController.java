@@ -49,4 +49,12 @@ public class MemberController {
             return "redirect:/members/login";
         }
     }
+
+    // Logout 처리
+    @GetMapping("/logout")
+    public String logout(HttpSession session, RedirectAttributes redirectAttributes) {
+        session.invalidate(); // 세션 전체 삭제
+        redirectAttributes.addFlashAttribute("message", "로그아웃되었습니다.");
+        return "redirect:/members/login";
+    }
 }

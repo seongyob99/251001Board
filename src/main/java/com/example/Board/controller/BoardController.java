@@ -21,9 +21,11 @@ public class BoardController {
 
     // 게시글 리스트
     @GetMapping
-    public String getAll(Model model) {
+    public String getAll(HttpSession session, Model model) {
         List<BoardDTO> list = boardService.getAll();
         model.addAttribute("boards", list);
+        Object loginUser = session.getAttribute("loginUser");
+        model.addAttribute("loginUser", loginUser);
         return "boardList";
     }
 
