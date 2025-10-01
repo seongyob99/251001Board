@@ -1,26 +1,30 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>게시판 리스트</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>게시판</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<h2>게시판</h2>
-<a th:href="@{/boards/create}">글 작성</a>
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>제목</th>
-        <th>작성자</th>
-        <th>상세</th>
-    </tr>
-    <tr th:each="b : ${boards}">
-        <td th:text="${b.id}"></td>
-        <td th:text="${b.title}"></td>
-        <td th:text="${b.writer}"></td>
-        <td><a th:href="@{/boards/{id}(id=${b.id})}">보기</a></td>
-    </tr>
-</table>
+<div class="card" style="max-width: 800px; margin: 50px auto; padding: 20px; box-shadow: 0 0 10px #ccc;">
+    <h2 style="text-align: center;">게시판</h2>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <a th:href="@{/boards/create}">글 작성</a>
+    </div>
+    <table border="1" width="100%" style="border-collapse: collapse;">
+        <tr>
+            <th>ID</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>상세</th>
+        </tr>
+        <tr th:each="b : ${boards}">
+            <td th:text="${b.id}">1</td>
+            <td th:text="${b.title}">제목</td>
+            <td th:text="${b.writer}">작성자</td>
+            <td><a th:href="@{/boards/{id}(id=${b.id})}">보기</a></td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

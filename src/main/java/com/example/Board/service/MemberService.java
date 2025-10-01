@@ -23,6 +23,7 @@ public class MemberService {
         Member member = new Member();
         member.setUsername(memberDTO.getUsername());
         member.setPassword(memberDTO.getPassword());
+        member.setEmail(memberDTO.getEmail());
         memberRepository.save(member);
         return "회원가입이 완료되었습니다";
     }
