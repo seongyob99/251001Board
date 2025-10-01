@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+<div th:if="${message}">
+    <script th:inline="javascript">
+        alert([[${message}]]);
+    </script>
+</div>
 <div class="card" style="max-width: 800px; margin: 50px auto; padding: 20px; box-shadow: 0 0 10px #ccc;">
     <h2 style="text-align: center;margin-bottom: 20px;margin-top: 20px;">게시판</h2>
     <div style="text-align: center; margin-bottom: 20px;">

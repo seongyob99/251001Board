@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/members")
@@ -37,12 +38,15 @@ public class MemberController {
 
     // Login 처리
     @PostMapping("/login")
-    public String login(MemberDTO memberDTO, HttpSession session, Model model) {
-        String msg = memberService.login(memberDTO);
-        if("로그인 성공".equals(msg)) {
-            session.setAttribute("loginUser", memberDTO.getUsername());
+    public String login(MemberDTO memberDTO, RedirectAttributes redirectAttrs) {
+        boolean success = memberService.login(memberDTO).equals("로그인 성공");
+        if (success) {
+            // 로그인 성공 시 redirect + flash attribute
+            redirectAttrs.addFlashAttribute("message", "로그인 성공");
+            return "redirect:/boards";
+        } else {
+            redirectAttrs.addFlashAttribute("message", "로그인 실패");
+            return "redirect:/members/login";
         }
-        model.addAttribute("message", msg);
-        return "loginResult";
     }
 }
