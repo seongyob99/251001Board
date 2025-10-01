@@ -19,13 +19,25 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
 
-    // 게시글 리스트
     @GetMapping
-    public String getAll(HttpSession session, Model model) {
-        List<BoardDTO> list = boardService.getAll();
-        model.addAttribute("boards", list);
+    public String getAll(
+            @RequestParam(required = false) Long lastId, // 커서
+            @RequestParam(defaultValue = "10") int size,  // 한 번에 가져올 글 수
+            HttpSession session,
+            Model model) {
+
+        // 로그인 유저
         Object loginUser = session.getAttribute("loginUser");
         model.addAttribute("loginUser", loginUser);
+
+        // 게시글 조회
+        List<BoardDTO> list = boardService.getBoards(lastId, 5);
+        model.addAttribute("boards", list);
+
+        // 다음 페이지를 위한 lastId
+        Long newLastId = list.isEmpty() ? null : list.get(list.size() - 1).getId();
+        model.addAttribute("lastId", newLastId);
+
         return "boardList";
     }
 

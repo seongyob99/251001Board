@@ -53,6 +53,12 @@
             </td>
         </tr>
     </table>
+    <div style="text-align:center; margin-top:20px;">
+        <button th:if="${lastId != null}"
+                th:onclick="'location.href=\'/boards?lastId=' + ${lastId} + '\';'">
+            더보기
+        </button>
+    </div>
 </div>
 </body>
 </html>

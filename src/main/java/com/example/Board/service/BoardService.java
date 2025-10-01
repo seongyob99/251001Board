@@ -4,6 +4,8 @@ import com.example.Board.domain.Board;
 import com.example.Board.dto.BoardDTO;
 import com.example.Board.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -75,5 +77,25 @@ public class BoardService {
             return true;
         }
         return false;
+    }
+
+    // 커서기반 페이징
+    public List<BoardDTO> getBoards(Long lastId, int size) {
+        List<Board> boards;
+        Pageable pageable = PageRequest.of(0, size); // 0페이지, size만큼
+
+        if (lastId == null) {
+            boards = boardRepository.findAllByOrderByIdDesc(pageable);
+        } else {
+            boards = boardRepository.findByIdLessThanOrderByIdDesc(lastId, pageable);
+        }
+
+        return boards.stream()
+                .map(b -> new BoardDTO(
+                        b.getId(),
+                        b.getTitle(),
+                        b.getContent(),
+                        b.getWriter()))
+                .collect(Collectors.toList());
     }
 }
