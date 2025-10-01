@@ -31,7 +31,7 @@ public class BoardController {
         model.addAttribute("loginUser", loginUser);
 
         // 게시글 조회
-        List<BoardDTO> list = boardService.getBoards(lastId, 5);
+        List<BoardDTO> list = boardService.getBoards(lastId, 5); // 5개씩
         model.addAttribute("boards", list);
 
         // 다음 페이지를 위한 lastId
