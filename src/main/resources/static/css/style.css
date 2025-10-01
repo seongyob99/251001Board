@@ -1,0 +1,101 @@
+/* style.css */
+/* 기본 리셋/타이포 */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: Inter, "Noto Sans KR", Arial, sans-serif;
+  background: #f5f7fb;
+  color: #222;
+  line-height: 1.45;
+  padding: 24px;
+}
+
+/* 중앙 컨테이너 */
+.container {
+  max-width: 900px;
+  margin: 32px auto;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(30, 40, 50, 0.08);
+  padding: 28px;
+}
+
+/* 헤더 */
+.header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom: 20px;
+}
+.header h1 { font-size: 20px; color: #111827; }
+.header nav a {
+  margin-left: 12px;
+  color: #374151;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+.header nav a:hover { background: #eef2ff; color: #4338ca; }
+
+/* 폼 스타일 */
+form { margin-top: 12px; }
+.form-row { margin-bottom: 14px; display:flex; flex-direction:column; }
+label { font-size: 14px; margin-bottom:6px; color:#374151; }
+input[type="text"], input[type="password"], textarea {
+  width:100%;
+  padding:10px 12px;
+  border:1px solid #e6e9ef;
+  border-radius:8px;
+  font-size:14px;
+  background:#fbfbfd;
+}
+textarea { min-height:120px; resize:vertical; }
+
+/* 버튼 */
+.button {
+  display:inline-block;
+  background: linear-gradient(180deg,#4f46e5,#4338ca);
+  color:white;
+  border:none;
+  padding:10px 16px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+  transition:transform .08s ease, box-shadow .08s ease;
+}
+.button.secondary {
+  background:transparent;
+  border:1px solid #e6e9ef;
+  color:#374151;
+}
+.button:hover { transform:translateY(-1px); box-shadow:0 6px 18px rgba(16,24,40,0.06); }
+
+/* 메시지 */
+.message {
+  margin: 10px 0 16px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-weight:500;
+}
+.message.info { background:#e8f0ff; color:#1e3a8a; }
+.message.error { background:#fff1f2; color:#9f1239; }
+
+/* 테이블 (게시판 리스트) */
+.table {
+  width:100%;
+  border-collapse:collapse;
+  margin-top: 12px;
+}
+.table th, .table td {
+  text-align:left;
+  padding:10px 12px;
+  border-bottom:1px solid #eef2f6;
+}
+.table th { background:#fbfbfd; color:#374151; font-weight:600; }
+
+/* 반응형 */
+@media (max-width:600px) {
+  .container { padding:16px; margin:16px; }
+  .header h1 { font-size:18px; }
+  .table th, .table td { padding:8px; font-size:13px; }
+}

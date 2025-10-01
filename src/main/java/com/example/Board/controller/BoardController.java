@@ -2,6 +2,7 @@ package com.example.Board.controller;
 
 import com.example.Board.dto.BoardDTO;
 import com.example.Board.service.BoardService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +33,8 @@ public class BoardController {
 
     // 게시글 작성 처리
     @PostMapping("/create")
-    public String create(BoardDTO boardDTO, Model model) {
+    public String create(BoardDTO boardDTO, HttpSession session) {
+        String loginUser = (String) session.getAttribute("loginUser");
         boardService.create(boardDTO);
         return "redirect:/boards";
     }

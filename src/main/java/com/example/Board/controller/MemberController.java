@@ -2,6 +2,7 @@ package com.example.Board.controller;
 
 import com.example.Board.dto.MemberDTO;
 import com.example.Board.service.MemberService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,8 +37,11 @@ public class MemberController {
 
     // Login 처리
     @PostMapping("/login")
-    public String login(MemberDTO memberDTO, Model model) {
+    public String login(MemberDTO memberDTO, HttpSession session, Model model) {
         String msg = memberService.login(memberDTO);
+        if("로그인 성공".equals(msg)) {
+            session.setAttribute("loginUser", memberDTO.getUsername());
+        }
         model.addAttribute("message", msg);
         return "loginResult";
     }

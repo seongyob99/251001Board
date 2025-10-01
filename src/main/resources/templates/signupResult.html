@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입 결과</title>
+</head>
+<body>
+<h2>회원가입 결과</h2>
+<p th:text="${message}">가입 결과 메시지</p>
+<a th:href="@{/members/login}">로그인</a>
+<a th:href="@{/members/signup}">다시 가입</a>
+</body>
+</html>

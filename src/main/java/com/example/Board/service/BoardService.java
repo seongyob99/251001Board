@@ -21,21 +21,34 @@ public class BoardService {
         Board board = new Board();
         board.setTitle(boardDTO.getTitle());
         board.setContent(boardDTO.getContent());
+        board.setWriter(boardDTO.getWriter());
         Board saved = boardRepository.save(board);
-        return new BoardDTO(saved.getId(), saved.getTitle(), saved.getContent());
+        return new BoardDTO(
+                saved.getId(),
+                saved.getTitle(),
+                saved.getContent(),
+                saved.getWriter());
     }
 
     // 게시글 전체 조회
     public List<BoardDTO> getAll() {
         return boardRepository.findAll().stream()
-                .map(b -> new BoardDTO(b.getId(), b.getTitle(), b.getContent()))
+                .map(b -> new BoardDTO(
+                        b.getId(),
+                        b.getTitle(),
+                        b.getContent(),
+                        b.getWriter()))
                 .collect(Collectors.toList());
     }
 
     // 게시글 단일 조회
     public BoardDTO getOne(Long id) {
         Optional<Board> board = boardRepository.findById(id);
-        return board.map(b -> new BoardDTO(b.getId(), b.getTitle(), b.getContent())).orElse(null);
+        return board.map(b -> new BoardDTO(
+                b.getId(),
+                b.getTitle(),
+                b.getContent(),
+                b.getWriter())).orElse(null);
     }
 
     // 게시글 수정
@@ -46,7 +59,11 @@ public class BoardService {
             b.setTitle(boardDTO.getTitle());
             b.setContent(boardDTO.getContent());
             Board updated = boardRepository.save(b);
-            return new BoardDTO(updated.getId(), updated.getTitle(), updated.getContent());
+            return new BoardDTO(
+                    updated.getId(),
+                    updated.getTitle(),
+                    updated.getContent(),
+                    updated.getWriter());
         }
         return null;
     }
